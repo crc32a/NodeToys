@@ -1,0 +1,13 @@
+{
+  "db_usr": "ntusr", 
+  "db_engine": "mysql", 
+  "db_user": "ntusr", 
+  "admins": [
+    "Carlos D. Garza", 
+    "carlos.garza@rackspace.com"
+  ], 
+  "db_port": "", 
+  "db_passwd": "ntpasswd", 
+  "db_name": "nodetoys", 
+  "db_host": ""
+}

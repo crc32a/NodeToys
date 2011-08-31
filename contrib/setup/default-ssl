@@ -1,0 +1,30 @@
+#add this file to your sites-available directory in apache
+#Then link to it from sites-enabled
+
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+ErrorLog logs/ssl_error_log
+TransferLog logs/ssl_access_log
+LogLevel warn
+SSLEngine on
+SSLProtocol all -SSLv2
+SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM:+LOW
+SSLCertificateFile /etc/localhost.crt
+SSLCertificateKeyFile /etc/localhost.key
+SetEnvIf User-Agent ".*MSIE.*" \
+         nokeepalive ssl-unclean-shutdown \
+         downgrade-1.0 force-response-1.0
+CustomLog logs/ssl_request_log \
+          "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+
+    DocumentRoot /var/www/django-app/
+    ServerName django-app
+    Alias /static /var/www/django-app/static
+    Alias /media/ /usr/lib/python2.4/site-packages/django/contrib/admin/media/
+    WSGIScriptAlias / /var/www/django-app/nt.wsgi
+    ErrorLog logs/wsgi_log
+</VirtualHost>
+
+</IfModule>
+
+

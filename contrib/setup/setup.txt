@@ -1,0 +1,49 @@
+Steup for slice host
+=====================
+Copy sshkeys
+
+
+Copy the below to /etc/iptables.sav
+*filter 
+:INPUT ACCEPT [550:38104]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [301:28180]
+-A INPUT -p tcp -m state --state ESTABLISHED -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -m recent --set --name sshattack --rsource
+-A INPUT -m recent --rcheck --seconds 60 --hitcount 16 --name sshattack --rsource -m limit --limit 4/min -j LOG --log-prefix "SSH attack: "
+-A INPUT -m recent --rcheck --seconds 60 --hitcount 16 --name sshattack --rsource -j DROP
+COMMIT
+
+copy below to /etc/network/if-up.d/iptables
+#!/bin/sh
+iptables-restore < /etc/iptables.sav
+
+useradd -m -s /bin/bash crc
+usermod -a -G sudo crc 
+
+#setup passwd for crc
+
+cd /etc
+openssl genrsa -out localhost.key 4096
+openssl req -new -key localhost.key -x509 -days 730 -out localhost.crt
+
+#Tested on Ubuntu 10.04(LTS)
+sudo apt-get install git-core python-openssl apache2 apache2-mpm-prefork
+sudo apt-get install libapache2-mod-wsgi mysql-server python-mysqldb
+sudo apt-get install python-django
+
+For some reason my apache2 on ubuntu 10.04 didn't have the ssl module 
+loaded even though it was installed.
+
+run the below commands.
+
+ln -s /etc/apache2/mods-available/ssl.load /etc/apache2/mods-enabled/
+ln -s /etc/apache2/mods-available/ssl.conf /etc/apache2/mods-enabled/
+
+don't forget to create a /var/www/django-app and 
+    copy the ./NodeToys/nt directory there
+
+copy the nodetoys.json file to your /etc directory
+Its basically an external file for values that will be pulled by the
+settings.py file. So you don't have to store sensitive values directly
+in your settings.py file.
