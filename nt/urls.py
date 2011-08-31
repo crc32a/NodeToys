@@ -9,4 +9,5 @@ nt = NodeToy()
 urlpatterns = patterns('',
     (r'^admin/?$',admin.site.root),
     (r'^request/echo/?$',nt.gview,{'view':'requestEcho'}),
+    (r'^request/big/?$',nt.gview,{'view':'bigrequest'}),
 )

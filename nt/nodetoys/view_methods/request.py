@@ -11,6 +11,12 @@ def headerName(metaValue):
     else:
         return m.group(1)
 
+def bigrequest(self):
+    entity = {}
+    request_size = len(self.request.raw_post_data)
+    entity["request_size"]=request_size
+    return self.response(entity=entity)
+
 def requestEcho(self):
     entity = {}
     metaItems = dir(self.request)
