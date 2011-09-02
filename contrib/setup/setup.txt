@@ -29,8 +29,12 @@ openssl req -new -key localhost.key -x509 -days 730 -out localhost.crt
 
 #Tested on Ubuntu 10.04(LTS)
 sudo apt-get install git-core python-openssl apache2 apache2-mpm-prefork
-sudo apt-get install libapache2-mod-wsgi mysql-server python-mysqldb
-sudo apt-get install python-django
+sudo apt-get install libapache2-mod-wsgi python-mysqldb
+sudo apt-get install python-django python-pkg-resources
+
+git clone git://github.com/crc32a/NodeToys.git 
+
+sudo apt-get install mysql-server #If your running the db on the same box
 
 For some reason my apache2 on ubuntu 10.04 didn't have the ssl module 
 loaded even though it was installed.
