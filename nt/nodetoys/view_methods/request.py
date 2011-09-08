@@ -51,7 +51,7 @@ def requestStatus(self):
     except ValueError:
         status = 406
         entity["message"]  = "Error %s was not an integer setting status to " 
-        entity["message"] += "500 instead"%last_uri
+        entity["message"] += "500 instead of %s"%last_uri
         entity["status"] = status
         return self.response(entity=entity,status=status)
     entity["message"]= "Setting status per uri"
