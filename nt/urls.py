@@ -7,7 +7,6 @@ from django.contrib import admin
 nt = NodeToy()
 
 urlpatterns = patterns('',
-    (r'^admin/?$',admin.site.root),
     (r'^request/echo/?$',nt.gview,{'view':'requestEcho'}),
     (r'^request/big/?$',nt.gview,{'view':'bigrequest'}),
     (r'^request/status/([0-9]+)/?$',nt.gview,{'view':'requestStatus'}),
