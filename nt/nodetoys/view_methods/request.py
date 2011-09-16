@@ -79,9 +79,10 @@ def requestHello(self):
 def requestYhwh(self):
     kw = {}
     n = 5
-    msg =  u"\u05D4\u05D5\u05D4\u05D9 "
-    msg += u"\u05D0\u05D5\u05D4 "
-    msg += u"\u05D4\u05D5\u05D4\u05D9"
+    msg  = u"\u05D9\u05D4\u05D5\u05D4 "
+    msg += u"\u05D4\u05D5\u05D0 "
+    msg += u"\u05D9\u05D4\u05D5\u05D4"
+
     kw["content"] = "<html>" + "<big>"*n + msg + "</big>"*n + "</html>"
     kw["content_type"] = "text/html; charset=utf-8"
     kw["status"] = 200
