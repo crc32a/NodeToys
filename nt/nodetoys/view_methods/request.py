@@ -94,7 +94,7 @@ def requestSleep(self):
     entity = {}
     path_info = self.request.path
     try:
-        secs = float(path_info.split("/")[-1])
+        secs = float(self.urlSplit()[-1])
     except ValueError:
         status = 406
         entity["message"]  = "Error %s was not an integer not sleeping" 

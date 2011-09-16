@@ -1,7 +1,7 @@
 def sendBytes(self):
     entity = {}
     path_info = self.request.path
-    last_uri = path_info.split("/")[-1]
+    last_uri = self.urlSplit()[-1]
     try:
         nbytes = int(last_uri) 
     except ValueError:
