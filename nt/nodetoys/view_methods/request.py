@@ -101,7 +101,7 @@ def requestSleep(self):
         entity["status"] = status
         return self.response(entity=entity,status=status)
     status = 200
-    entity["message"]= "slept for %i seconds"
+    entity["message"]= "slept for %f seconds"%secs
     entity["status"] = 200
     time.sleep(secs)
     return self.response(entity=entity,status=status)
