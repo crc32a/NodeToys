@@ -7,7 +7,8 @@ class NodeToy(GenericView):
     def __init__(self,*args,**kw):
         GenericView.__init__(self,*args,**kw)
         meth_dict = {"nt.nodetoys.view_methods.request":
-                        ["requestEcho","bigrequest","requestStatus"],
+                        ["requestEcho","bigrequest","requestStatus",
+                         "requestSleep","requestHello","requestYhwh"],
                      "nt.nodetoys.view_methods.send":
                         ["sendBytes"]
                     }

@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 import socket
+import time
 import re
 
 
@@ -42,10 +44,11 @@ def requestEcho(self):
             entity["headers"][header]=v        
     return self.response(entity=entity)
 
+
 def requestStatus(self):
     entity = {}
     path_info = self.request.path
-    last_uri = path_info.split("/")[-1]
+    last_uri = self.urlSplit()
     try:
         status = int(last_uri) 
     except ValueError:
@@ -56,6 +59,50 @@ def requestStatus(self):
         return self.response(entity=entity,status=status)
     entity["message"]= "Setting status per uri"
     entity["status"] = status
+    return self.response(entity=entity,status=status)
+
+def requestHello(self):
+    kw = {}
+    try:
+        n = int(self.urlSplit()[-1])
+        kw["content"]  = "<html>"
+        kw["content"] += "<big>"*n
+        kw["content"] += "Hello"
+        kw["content"] += "</big>"*n
+        kw["content"] += "</html>"
+    except:
+        kw["content"] = "<html>Hello</html>"
+    kw["content_type"] = "text/html;"
+    kw["status"] = 200
+    return HttpResponse(**kw)
+
+def requestYhwh(self):
+    kw = {}
+    n = 5
+    msg =  u"\u05D4\u05D5\u05D4\u05D9 "
+    msg += u"\u05D0\u05D5\u05D4 "
+    msg += u"\u05D4\u05D5\u05D4\u05D9"
+    kw["content"] = "<html>" + "<big>"*n + msg + "</big>"*n + "</html>"
+    kw["content_type"] = "text/html; charset=utf-8"
+    kw["status"] = 200
+    return HttpResponse(**kw)
+    
+    
+
+def requestSleep(self):
+    entity = {}
+    path_info = self.request.path
+    try:
+        secs = float(path_info.split("/")[-1])
+    except ValueError:
+        status = 406
+        entity["message"]  = "Error %s was not an integer not sleeping" 
+        entity["status"] = status
+        return self.response(entity=entity,status=status)
+    status = 200
+    entity["message"]= "slept for %i seconds"
+    entity["status"] = 200
+    time.sleep(secs)
     return self.response(entity=entity,status=status)
 
 

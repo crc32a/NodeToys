@@ -38,3 +38,6 @@ class GenericView(object):
     def jsonRequest():
         return json.loads(self.request.raw_post_data)
 
+    def urlSplit(self):
+        return [u for u in self.request.path_info.split("/") if u != ""]
+
