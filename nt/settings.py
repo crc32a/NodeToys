@@ -3,6 +3,8 @@ import json
 import sys
 import os
 
+version = "1.0.0"
+
 def save_json(json_file,obj):
     full_path = os.path.expanduser(json_file)
     full_path = os.path.abspath(full_path)

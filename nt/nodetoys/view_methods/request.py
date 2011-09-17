@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+import nt.settings
 import socket
 import time
 import re
@@ -42,7 +43,13 @@ def requestEcho(self):
         header = headerName(k)
         if header:
             entity["headers"][header]=v        
-    return self.response(entity=entity)
+    return self.response(entity=entity,status=200)
+
+def requestVersion(self):
+    entity = {}
+    entity["version"] = nt.settings.version
+    status = 200
+    return self.response(entity=entity,status=200)
 
 
 def requestStatus(self):

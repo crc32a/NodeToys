@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     (r'^request/sleep/([0-9]+)$',nt.gview,{'view':'requestSleep'}),
     (r'^request/hello(/[0-9]+)?/?$',nt.gview,{'view':'requestHello'}),
     (r'^request/yhwh/?$',nt.gview,{'view':'requestYhwh'}),
+    (r'^request/version/?$',nt.gview,{'view':'requestVersion'}),
 )
